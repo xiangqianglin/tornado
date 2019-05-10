@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Base{% end %}</title>  {# 被词语句包裹的代码块在子模板中可以被重写，覆盖父模板中的 #}
+    <link rel="shortcut icon" href="{{ static_url('images/favicon.ico') }}"> {# 添加一个图标在由标里面 #}
+    {# 可以导入一些其他的模板文件，一般使用 include 的时候，模板文件中不使用 block 块  #}
+</head>
+<body>
+{% block body %} this is tornado{% end %}  {# 输出里面的字母 #}
+</body>
+</html>
+{#排版用code-》Rofermt code #}
