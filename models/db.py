@@ -17,7 +17,7 @@ engine = create_engine(DB_URI)  #连接数据库 1
 
 Base = declarative_base(engine)   ##创建Models库要用的 2
 
-Session = sessionmaker(bind=engine)  #创建会话类 3
+Session = sessionmaker(bind=engine)  #绑定一个引擎来创建数据库会话类 3
 
 if __name__ == '__main__':
     connection = engine.connect()#连接数据库
