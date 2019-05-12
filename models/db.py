@@ -1,0 +1,30 @@
+#连接数据库
+from sqlalchemy import create_engine  #连接数据库
+from sqlalchemy.ext.declarative import declarative_base #创建Models库要用的
+from sqlalchemy.orm import sessionmaker  #创建会话库
+
+HOST = '192.168.80.130'
+PORT = '3306'
+DATABASE = 'lin'
+USERNAME = 'admin'
+PASSWORD = 'Root110qwe'
+
+DB_URI = 'mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8'.format(
+    USERNAME,PASSWORD,HOST,PORT,DATABASE
+)
+
+engine = create_engine(DB_URI)  #连接数据库 1
+
+Base = declarative_base(engine)   ##创建Models库要用的 2
+
+Session = sessionmaker(bind=engine)  #创建会话类 3
+
+if __name__ == '__main__':
+    connection = engine.connect()#连接数据库
+    result = connection.execute('select 1')#输出的内容
+    print(result.fetchone())
+
+
+#连接数据库1
+#创建models模板2
+#创建会话和使用session来增删查改3
