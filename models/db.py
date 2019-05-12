@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker  #创建会话库
 
 HOST = '192.168.80.130'
 PORT = '3306'
-DATABASE = 'lin'
+DATABASE = 'lin'   #这个是数据库创建的库名
 USERNAME = 'admin'
 PASSWORD = 'Root110qwe'
 
