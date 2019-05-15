@@ -1,0 +1,13 @@
+{# 用户登录注册显示在网页 #}
+{% extends 'base3.html' %}              {# 引入3_html。html文件 #}
+
+{% block title %}register page{% end %}    {# 继承模板 #}
+
+{% block body %}                         {# 覆盖title #}
+<form action="/signup" enctype="multipart/form-data" method="post">
+    用户：<input type="text" name="username" /><br>
+    密码：<input type="password" name="password1" /><br>  {# 用password别人看不见密码 #}
+    确认密码：<input type="password" name="password2" /><br>  {# 用password别人看不见密码 #}
+    <input type="submit" />                   {# submit是提交标签 #}
+</form>
+{% end %}

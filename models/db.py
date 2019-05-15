@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker  #创建会话库
 
 HOST = '192.168.80.130'
 PORT = '3306'
-DATABASE = 'lin'   #这个是数据库创建的库名
+DATABASE = 'tudo36'   #这个是数据库创建的库名
 USERNAME = 'admin'
 PASSWORD = 'Root110qwe'
 
@@ -25,6 +25,3 @@ if __name__ == '__main__':
     print(result.fetchone())
 
 
-#连接数据库1
-#创建models模板2
-#创建会话和使用session来增删查改3
