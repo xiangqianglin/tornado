@@ -2,8 +2,10 @@
 from datetime import datetime                                                #时间库
 from sqlalchemy import Column, Integer, String, DateTime,ForeignKey          #用于创建表的中间件sqlalchemy，
 from sqlalchemy.orm import relationship                                      #relationship是关系管理型的mode模块
-from models.db import Base,Session                                                 #引入models模块里面的Base类型和Session
+from sqlalchemy.sql import exists                                            #20行  exists是SQL里面的查询 返回的结果是Tree或者Fells
+from models.db import Base,Session                                           #引入models模块里面的Base类型和Session
 
+session = Session()
 class User(Base):                                                            #创建用户表的信息  一个一会对应多个post关系
     __tablename__ = 'users'                                                  #这个user可以随意   《数据库表名》
     id = Column(Integer,primary_key=True,autoincrement=True)                 #限制：primart_key是主键，autoincrement是自增长  《创建表中的字段》
@@ -13,7 +15,20 @@ class User(Base):                                                            #�
     # email = Column(String(80))                                             #增加邮件字段
 
     def __repr__(self):
-        return "<User:#{}-{}>".format(self.id, self.name)                    #字符串显示的格式
+        return "<User:#{}-{}>".format(self.id, self.username)                    #字符串显示的格式
+
+    @classmethod
+    def is_exis(cls,username):                                      #接收一个参数，查询一个参数好认证是否存在
+        return session.query(exists().where(cls.username == username)).scalar()  #scalar这个也是查询，把结果向量化，获取他的实际值
+
+    @classmethod
+    def get_password(cls,username):                                      #接收两个参数，查询两个参数好认证是否存在
+        user = session.query(cls).filter_by(username=username).first()       #查询不到就返回一个空
+        if user:
+            return user.password
+        else:
+            return ''
+
 
 class Post(Base):                                                            #创建提交  一个一会对应多个post关系
     __tablename__ = 'posts'

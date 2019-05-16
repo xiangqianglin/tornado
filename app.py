@@ -17,11 +17,29 @@ class Application(tornado.web.Application):
             (r'/explore', ExploreHandler),
             (r'/post/(?P<post_id>[0-9]+)', PostHandler),  #？P是大写的，是Python里面用正则命名捕获的id ,在url里面添加的数字可以在要么显示
             (r'/signup', account.RegisterHandler),                        #数据库-用户注册登录页面
+            (r'/login', account.LoginHanlder),                            #数据库-用户注册登录页面的认证
         ]
         settings = dict(
             debug=True,                        # 访问不存在的会报错1
             template_path='templates',         # 配置模板文件的名字是新创建的文件夹的名字一样
             static_path='static',              # 静态文件配置 自动去查找那个文件
+        cookie_secret="wsegehdsg" ,            #随便输入字符串，好让别人看不见，预防用户伪造cookie
+        login_url='/login',                    #用cxtends访问页面,重定向跳转 到login登录页面
+        # xsrf_cookies=True,                   #跨站请求防御***
+        pycket = {                             #这个是用session登陆用的
+            'engine': 'redis',                 #使用redis这个引擎，存储session数据
+            'storage': {
+                'host': 'localhost',           #用localhost去连接127.0.0.1这个地址
+                'port': 6379,                  #端口是6379
+                # 'password': '',              #有密码就要加
+                'db_sessions': 5,              #redis db index   redis的第五个db位置
+                # 'db_notifications': 11,      #可以不用
+                'max_connections': 2 ** 30,    #储存最大连接数
+            },
+            'cookies': {
+                'expires_days': 30,  #过期时间
+            },
+        }
         )
         super().__init__(hanlders,**settings)  #super就是调用父类的方法，setting都是关键字，要用**来解包
 

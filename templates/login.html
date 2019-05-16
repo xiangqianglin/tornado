@@ -1,0 +1,18 @@
+{# 用户登录注册显示在网页的认证是否一致 #}
+{% extends 'base3.html' %}              {# 引入3_html。html文件 #}
+
+{% block title %}login page{% end %}    {# 继承模板 #}
+
+{% block body %}                         {# 覆盖title #}
+
+{% if mai %}                              {# 把错误信息显示出来 #}
+错误信息:{{ mai }}
+{% end %}
+
+
+<form action="/login" enctype="multipart/form-data" method="post">
+    用户：<input type="text" name="username" /><br>
+    密码：<input type="password" name="password" /><br>  {# 用password别人看不见密码 #}
+    <input type="submit" />                   {# submit是提交标签 #}
+</form>
+{% end %}

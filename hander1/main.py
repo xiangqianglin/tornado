@@ -1,5 +1,10 @@
 import tornado.web
+from pycket.session import SessionMixin  #添加session的一些功能的类
 
+class BaseHandler(tornado.web.RequestHandler,SessionMixin):  #所有需要跳转回访问页面的类都可以继承这个
+    def get_current_user(self):   #复写current_user方法来 用户认证
+        # return self.get_secure_cookie('tudo_cookie',None)  #返回设置cookie的名字，拿不到就返回空
+        return self.session.get('tudo_user',None)  #用session去拿tudo_user，拿不到就返回空
 
 class IndexHandler(tornado.web.RequestHandler):  #所有需要跳转回访问页面的类都可以继承这个
     def get(self):
