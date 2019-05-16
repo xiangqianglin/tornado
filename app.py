@@ -16,8 +16,9 @@ class Application(tornado.web.Application):
             (r'/', IndexHandler),
             (r'/explore', ExploreHandler),
             (r'/post/(?P<post_id>[0-9]+)', PostHandler),  #？P是大写的，是Python里面用正则命名捕获的id ,在url里面添加的数字可以在要么显示
-            (r'/signup', account.RegisterHandler),                        #数据库-用户注册页面
-            (r'/login', account.LoginHanlder),                            #数据库-用户登录页面的认证
+            (r'/signup', account.RegisterHandler),                        #数据库-用户注册页面1
+            (r'/login', account.LoginHanlder),                            #数据库-用户登录页面的认证2
+            (r'/upload', main.UploadHandler),                             #图片保存到数据库3
         ]
         settings = dict(
             debug=True,                        # 访问不存在的会报错1

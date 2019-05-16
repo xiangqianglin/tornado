@@ -1,6 +1,6 @@
 #db查询的模块的辅助函数
 import hashlib     #用做  md5  密码加密
-from models.auth import User
+from models.auth import User,Post
 from models.db import Session
 
 
@@ -17,3 +17,15 @@ def register(username,password):                                     #辅助函�
     s = Session()
     s.add(User(username=username,password=hasheb(password)))         #密码加密
     s.commit()
+
+def add_post(image_url,username):                                    #把上传的图片保存到数据库
+    s = Session()
+    user = s.query(User).filter_by(username=username).first()
+    post = Post(image_url=image_url,user=user)
+    s.add(post)
+    s.commit()
+    post_id = post.id
+    s.close()
+
+    return post_id
+

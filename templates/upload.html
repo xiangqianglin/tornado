@@ -1,0 +1,10 @@
+{# 上传图片文件 #}
+{% extends 'base3.html' %}                         {# 继承模板 #}
+{% block title %}upload page{% end %}               {# 覆盖title #}
+
+{% block body %}                                    {# 覆盖body #}
+<form action="/upload" enctype="multipart/form-data" method="post">
+    File：<input type="file" name="picture" /><br>  {#  上传文件：选择文件 #}
+    <input type="submit" />                         {# submit是提交标签 #}
+</form>
+{% end %}
