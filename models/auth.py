@@ -42,10 +42,7 @@ class Post(Base):                                                            #�
     def __repr__(self):
         return "<post:#{}-{}>".format(self.id, self.name)                    #字符串显示的格式
 
-def register(username,password):                                             #辅助函数，提交用户和密码
-    s = Session()
-    s.add(User(username=username,password=password))
-    s.commit()
+
 if __name__ == '__main__':
     Base.metadata.create_all()                                               #执行create_all方法就会去找对应的类在去创建表
 

@@ -1,8 +1,9 @@
 #处理账号相关的模块
 import tornado.web
-from models.auth import register                               #引入models文件下面auth。py里面的register函数
 from .main import BaseHandler
-from utils.account import auto
+from utils.account import auto, register
+
+
 class RegisterHandler(tornado.web.RequestHandler):
     def get(self):
         self.render('register.html')  #提交用户和密码信息
