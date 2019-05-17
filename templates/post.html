@@ -4,5 +4,6 @@
 {% block title %}post page{% end %}    {# 继承模板 #}
 
 {% block body %}                         {# 覆盖title #}
-post id {{ post_id }}
+post id {{ post_id }} upload by {{ post.user.name }}<br>
+<img src="{{ static_url(p.image_url) }}" /><br>
 {% end %}

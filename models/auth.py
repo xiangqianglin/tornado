@@ -17,13 +17,13 @@ class User(Base):                                                            #�
     def __repr__(self):
         return "<User:#{}-{}>".format(self.id, self.username)                    #字符串显示的格式
 
-    @classmethod
-    def is_exis(cls,username):                                      #接收一个参数，查询一个参数好认证是否存在
+    @classmethod     #类方法的装饰器
+    def is_exis(cls,username):                                                   #接收一个参数，查询一个参数好认证是否存在
         return session.query(exists().where(cls.username == username)).scalar()  #scalar这个也是查询，把结果向量化，获取他的实际值
 
-    @classmethod
-    def get_password(cls,username):                                      #接收两个参数，查询两个参数好认证是否存在
-        user = session.query(cls).filter_by(username=username).first()       #查询不到就返回一个空
+    @classmethod     #类方法的装饰器
+    def get_password(cls,username):                                              #接收两个参数，查询两个参数好认证是否存在
+        user = session.query(cls).filter_by(username=username).first()           #查询不到就返回一个空
         if user:
             return user.password
         else:
@@ -40,7 +40,7 @@ class Post(Base):                                                            #�
 
 
     def __repr__(self):
-        return "<post:#{}-{}>".format(self.id, self.name)                    #字符串显示的格式
+        return "<post:#{}-{}>".format(self.id)                    #字符串显示的格式
 
 
 if __name__ == '__main__':

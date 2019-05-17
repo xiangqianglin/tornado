@@ -1,8 +1,11 @@
-{# 图片显示在网页 #}
+{# 用户注册和登录成功后都要跳转到的页面 #}
 {% extends 'base3.html' %}              {# 引入3_html。html文件 #}
 
 {% block title %}index page{% end %}    {# 继承模板 #}
 
 {% block body %}                         {# 覆盖title #}
-欢迎您光临
+欢迎您光临<br>
+{% for p in posts %}
+<img src="{{ static_url(p.image_url) }}" /><br>
+{% end %}
 {% end %}

@@ -4,7 +4,7 @@ from .main import BaseHandler
 from utils.account import auto, register
 
 
-class RegisterHandler(tornado.web.RequestHandler):
+class RegisterHandler(tornado.web.RequestHandler):   #注册
     def get(self):
         self.render('register.html')  #提交用户和密码信息
     def post(self):                   #
@@ -18,7 +18,7 @@ class RegisterHandler(tornado.web.RequestHandler):
         else:
             self.write('bab username/password')                  #跳转到输出信息
 
-class LoginHanlder(BaseHandler):
+class LoginHanlder(BaseHandler):            #登陆
     def get(self):  # 设置cookie信息
         next_url = self.get_argument('next', '')  # 拿到post提交的这个只是希望在登录页面显示是用那个路由访问的，在html2里面设置  跳转回原来正在访问的 URL
         mai = self.get_argument('mai','')
@@ -28,11 +28,12 @@ class LoginHanlder(BaseHandler):
         username = self.get_argument('username','')       # 所有的表单都是用get_argument按键值来操作，有就传入下面模板里面的username，在html_2.html判断，提交了就输出里面的内容。。没有就返回no
         password = self.get_argument('password','')       # 所有的表单都是用get_argument按键值来操作，有就传入下面模板里面的username，在html_2.html判断，提交了就输出里面的内容。。没有就返回no
         next_url = self.get_argument('next', '')          # 所有的表单都是用get_argument按键值来操作，有就传入下面模板里面的username，在html_2.html判断，提交了就输出里面的内容。。没有就返回no
+
         if not username.split() or not password.split():  # 判断提交时其中一个是空的或者是空格
             self.redirect('/login?mai=empty password or name')  # 就跳转会登录页面
         else:
             if auto(username,password):                    #用utils.account import auto的函数来效验
-                self.session.set("tudo_user", "username")  # 设置cookie名字，在带上用户记住的可以在浏览器看见的qq：内容*********3
+                self.session.set("tudo_user",username)  # 设置cookie名字，在带上用户记住的可以在浏览器看见的qq：内容*********3
                 if next_url:
                     self.redirect(next_url)  # 存在就跳转到next_url
                 else:
