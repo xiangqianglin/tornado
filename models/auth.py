@@ -29,11 +29,11 @@ class User(Base):                                                            #�
         else:
             return ''
 
-
 class Post(Base):                                                            #创建提交  一个一会对应多个post关系
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    image_url = Column(String(200))  #图片
+    image_url = Column(String(200))  #图片的属性字段
+    thumb_url = Column(String(200))  #缩略图片的属性字段，要在虚拟机里面生成迁移脚本alembic revision --autogenerate -m 'add thumb url for posts'，在IDE昆明下载下来，在虚拟机里面更新alembic upgrade head
 
     user_id = Column(Integer,ForeignKey('users.id'))                           #ForeignKey是与外部连接关系的关键字
     user = relationship('User',backref='posts',uselist=False,cascade='all')   #relationship是关系管理型的mode模块

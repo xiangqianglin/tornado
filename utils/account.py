@@ -27,14 +27,11 @@ def add_post(image_url,username):                                    #把上传�
     post_id = post.id
     s.close()
     return post_id
-
     # s = Session()
     # user = s.query(User).filter_by(username=username).first()
     # s.add(Post(image_url=image_url,user=user))
     # s.commit()
     # s.close()
-    #
-
 
 def get_all_posts():                                                #显示所有图片信息
     session = Session()
