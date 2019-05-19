@@ -7,7 +7,14 @@
     {# 可以导入一些其他的模板文件，一般使用 include 的时候，模板文件中不使用 block 块  #}
 </head>
 <body>
-{% block body %} this is tornado{% end %}  {# 输出里面的字母 #}
+{% if current_user %}
+<h2>当前登录的用户：{{ current_user }} </h2>
+<hr>                                                       {# 水平线 #}
+{% end %}
+
+{% block body %}
+    this is tornado
+{% end %}  {# 输出里面的字母 #}
 </body>
 </html>
 {#排版用code-》Rofermt code #}

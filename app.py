@@ -14,7 +14,7 @@ class Application(tornado.web.Application):
     def __init__(self): #1
         hanlders = [
             (r'/', IndexHandler),
-            (r'/explore', ExploreHandler),
+            (r'/explore', ExploreHandler),                #是数据库的图片页面
             (r'/post/(?P<post_id>[0-9]+)', PostHandler),  #？P是大写的，是Python里面用正则命名捕获的id ,在url里面添加的数字可以在要么显示
             (r'/signup', account.RegisterHandler),                        #数据库-用户注册页面1
             (r'/login', account.LoginHanlder),                            #数据库-用户登录页面的认证2

@@ -33,6 +33,12 @@ def get_all_posts():                                                #显示所�
     posts = session.query(Post).all()
     return posts
 
+def get_posts_for(username):                                       #拿单个post图片的信息
+    session = Session()
+    user = session.query(User).filter_by(username=username).first()
+    posts = session.query(Post).filter_by(user=user).all()
+    return posts
+
 def get_post(post_id):                                             #拿单个post图片的信息
     session = Session()
     post = session.query(Post).filter_by(id=post_id).first()

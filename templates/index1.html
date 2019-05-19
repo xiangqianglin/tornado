@@ -6,6 +6,8 @@
 {% block body %}                         {# 覆盖title #}
 欢迎您光临<br>
 {% for p in posts %}
-<img src="{{ static_url(p.image_url) }}" /><br>
+<a href="{{ '/post/{}'.format(p.id) }}">
+    <img src="{{ static_url(p.image_url) }}" />
+</a><br>
 {% end %}
 {% end %}

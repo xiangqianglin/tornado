@@ -5,6 +5,8 @@
 
 {% block body %}                               {# 覆盖title #}
 {% for p in posts %}
-<img src="{{ static_url(p.thumb_url) }}" />    {# 缩略图地址 #}
+<a  href="{{ '/post/{}'.format(p.id) }}" >      {# 超链接跳转到p.id #}
+    <img src="{{ static_url(p.thumb_url) }}" /> {# 缩略图地址 #}
+</a>
 {% end %}
 {% end %}
