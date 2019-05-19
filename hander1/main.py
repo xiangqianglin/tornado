@@ -16,9 +16,10 @@ class IndexHandler(tornado.web.RequestHandler):  #首页 用户上传图片的�
 
 class ExploreHandler(tornado.web.RequestHandler):#最近上传的缩略图页面
     def get(self):
-        self.render('explore2.html')
+        posts = get_all_posts()
+        self.render('explore2.html',posts=posts)
 
-class PostHandler(tornado.web.RequestHandler): #单个图片详情页面
+class PostHandler(BaseHandler): #单个图片详情页面
     def get(self,post_id):
         post = get_post(post_id)               #在数据库查询单个图片出来
         if not post:
@@ -40,7 +41,9 @@ class UploadHandler(BaseHandler):                                #上传图片  
             up_img = UploadImage(p['filename'],self.settings['static_path'])
             up_img.save_upload(p['body'])
             up_img.make_thumb()
-            post_id = add_post(up_img.image_url,self.current_user) #self.current_user是拿用户名的字段
+            post_id = add_post(up_img.image_url,
+                               up_img.thumb_url,                   #添加字段信息
+                               self.current_user)                  #self.current_user是拿用户名的字段
 
         # self.write('提交成功')                                   #返回到网页的内容
         self.render('/post/{}'.format(post_id))                    #跳转到post.html  ========post_id找不到？？？？？？？？
