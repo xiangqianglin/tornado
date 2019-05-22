@@ -6,46 +6,8 @@
 {% block body %}                          {# 覆盖title #}
 
 <div class="alert alert-danger" role="alert">  {# 警告提示框 #}
-  欢迎您光临<br> A simple danger alert—check it out!
+  欢迎您再次光临！！！<br>
 </div>
-
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">     {# 导航栏 #}
-  <a class="navbar-brand" href="#">Python学习</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">基础<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">数据库</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          html
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">爬虫</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>          {# 这个是搜索 #}
-    </form>
-  </div>
-</nav>
 
 <div class="container">
 
@@ -53,13 +15,19 @@
         <div class="col-md-8">
 
             <div class="alert alert-primary" role="alert">          {# 警告提示框 #}
-              A simple primary alert—check it out!
+              精美图片
             </div>
 
-            {% for p in posts %}                                         {# 图片展示 #}
-            <a href="{{ '/post/{}'.format(p.id) }}">
-                <img src="{{ static_url(p.image_url) }}" class="img-fluid"/>
-            </a><br>
+            {% for p in posts %}                                        {# 缩略图片展示 #}
+                <div class="card" style="width: 18rem;">                   {# 卡片信息 #}
+                    <a href="{{ '/post/{}'.format(p.id) }}">                 {# 图片路径信息 #}
+                    <img class="card-img-top" src="{{ static_url(p.image_url) }}" alt="Card image cap">
+                    </a>
+                    <div class="card-body">
+                    <h5 class="card-title">强哥</h5>
+                    <p class="card-text">我就是我，不一样的烟火</p>
+                    </div>
+                </div>
             {% end %}
         </div>
 
@@ -68,16 +36,8 @@
                 <img src="http://code.z01.com/v4/assets/img/bootstrap-stack.png" class="figure-img img-fluid rounded" alt="...">
                 <figcaption class="figure-caption">A caption for the above image.</figcaption>
             </figure>
-
-             <div class="card" style="width: 18rem;">                   {# 卡片信息 #}
-                <img class="card-img-top" src="http://code.z01.com/v4/assets/img/bootstrap-stack.png" alt="Card image cap">
-                <div class="card-body">
-                <h5 class="card-title">强哥</h5>
-                <p class="card-text">我就是我，不一样的烟火</p>
-                <a href="#" class="btn btn-primary">超链接跳转</a>    {# 跳转到顶部 #}
-                </div>
-            </div>
+            <a href="#" class="btn btn-primary">超链接跳转</a>    {# 跳转到顶部 #}
         </div>
     </div>
 </div>
-{% end %}
+{% end %}           35:13

@@ -1,0 +1,16 @@
+{# Hero广告大块屏幕(Jumbotron) #}
+{% extends 'base3.html' %}                         {# 继承模板 #}
+{% block title %}logan page{% end %}            {# 覆盖title #}
+
+{% block body %}                                   {# 覆盖body #}
+                          {# Hero广告大块屏幕(Jumbotron) #}
+<div class="jumbotron">
+  <h1 class="display-3">成功退出!</h1>
+  <p class="lead">谢谢你再次光临</p>
+  <hr class="my-4">
+  <p>我将展示更好的</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="/login" role="button">重新登陆</a>
+  </p>
+</div>
+{% end %}

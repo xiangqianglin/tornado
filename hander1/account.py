@@ -41,3 +41,7 @@ class LoginHanlder(BaseHandler):            #登陆
             else:
                 self.redirect('/login?mai=账号或密码错误')  # 如果不是就跳转回要登录的状态
 
+class LogouHander(BaseHandler):
+    def get(self):
+        self.session.delete("tudo_user")   #退出登陆用的删除会话信息
+        self.render('logan.html')

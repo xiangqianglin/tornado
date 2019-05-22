@@ -1,3 +1,4 @@
+{# 所有要继承的页面 #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +12,47 @@
 </head>
 
 <body>
+
+                           {# 添加导航栏 #}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">强哥图片库</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">首页</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/explore">发现</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          用户中心
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">图片</a>
+          <a class="dropdown-item" href="#">收藏</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">喜欢</a>
+        </div>
+      </li>
+
 {% if current_user %}
-<h2>当前登录的用户：{{ current_user }} </h2>
-<hr>                                                       {# 水平线 #}
+      <li class="nav-item">
+        <a class="nav-link btn btn-outline-success my-2 my-sm-0 " href="/logan">{{ current_user }}退出登陆</a>      {# 添加循环 #}
+      </li>
 {% end %}
+
+    </ul>
+      <a href="/upload" class="btn btn-outline-success my-2 my-sm-0" >上传图片</a>      {# 类似按钮的超链接，修改成上传图片 #}
+  </div>
+</nav>
+
+
+
 
 {% block body %}
     this is tornado

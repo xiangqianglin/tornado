@@ -3,7 +3,7 @@ import tornado.ioloop
 import tornado.web
 
 from hander1.main import IndexHandler,ExploreHandler,PostHandler#选中要放外部的类按f6，在里面选，引入外部的main文件
-from hander1 import main,account            #用户注册用的
+from hander1 import main,account          #用户注册用的
 
 import tornado.options                      #显示额外的信息1
 from tornado.options import define,options  #调式模式 可以改变端口1
@@ -19,6 +19,7 @@ class Application(tornado.web.Application):
             (r'/signup', account.RegisterHandler),                        #数据库-用户注册页面1
             (r'/login', account.LoginHanlder),                            #数据库-用户登录页面的认证2
             (r'/upload', main.UploadHandler),                             #添加图片保存到数据库3
+            (r'/logan', account.LoginHanlder),                             #添加图片保存到数据库3
         ]
         settings = dict(
             debug=True,                        # 访问不存在的会报错1
