@@ -1,4 +1,4 @@
-{# 图片显示在网页 #}
+{# 缩略图片显示在首页 #}
 {% extends 'base3.html' %}                     {# 引入3_html。html文件 #}
 
 {% block title %}explore page{% end %}       {# 继承模板 #}
@@ -6,7 +6,7 @@
 {% block body %}                               {# 覆盖title #}
 {% for p in posts %}
 <a  href="{{ '/post/{}'.format(p.id) }}" >      {# 超链接跳转到p.id #}
-    <img src="{{ static_url(p.thumb_url) }}" /> {# 缩略图地址 #}
+    <img src="{{ static_url(p.thumb_url) }}" class="img-thumbnail"/> {# 缩略图地址    class="img-thumbnail"缩略图四周加个边框和圆角 #}
 </a>
 {% end %}
 {% end %}
