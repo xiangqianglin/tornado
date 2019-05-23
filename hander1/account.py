@@ -4,7 +4,7 @@ from .main import BaseHandler
 from utils.account import auto, register
 
 
-class RegisterHandler(tornado.web.RequestHandler):   #注册
+class RegisterHandler(BaseHandler):   #注册
     def get(self):
         self.render('register.html')  #提交用户和密码信息
     def post(self):                   #
@@ -14,6 +14,7 @@ class RegisterHandler(tornado.web.RequestHandler):   #注册
 
         if username and password1 and (password1 == password2):  #判断username和password不是空的还有1和2相等，就运行注册
             register(username,password1)
+            self.session.set('tudo_user',username)
             self.write('注册成功')
         else:
             self.write('bab username/password')                  #跳转到输出信息
@@ -30,7 +31,7 @@ class LoginHanlder(BaseHandler):            #登陆
         next_url = self.get_argument('next', '')          # 所有的表单都是用get_argument按键值来操作，有就传入下面模板里面的username，在html_2.html判断，提交了就输出里面的内容。。没有就返回no
 
         if not username.split() or not password.split():  # 判断提交时其中一个是空的或者是空格
-            self.redirect('/login?mai=empty password or name')  # 就跳转会登录页面
+            self.redirect('/login?mai=密码或账号错误')  # 就跳转会登录页面
         else:
             if auto(username,password):                    #用utils.account import auto的函数来效验
                 self.session.set("tudo_user",username)  # 设置cookie名字，在带上用户记住的可以在浏览器看见的qq：内容*********3

@@ -5,33 +5,31 @@
 
 {% block body %}                         {# 覆盖title #}
 
-{% if mai %}                              {# 把错误信息显示出来 #}
-错误信息:{{ mai }}
-{% end %}
+<div class="row justify-content-center">     {# justify-content-center是输入框居中 #}
+    <div class="col-12 col-sm-6 col-4 text-center">       {# 控制大小 text-center是元素居中 #}
+        {% if mai %}                              {# 把错误信息显示出来 #}
+            <div class="alert alert-danger" role="alert">  {# 警告提示框 #}
+              错误信息:{{ mai }}
+            </div>
+        {% end %}
 
-<form action="/login" enctype="multipart/form-data" method="post">
+        <form action="/login" enctype="multipart/form-data" method="post">
 
-    <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">username</span>
-        </div>
-        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="username">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-qq" aria-hidden="true"></i> username</span>
+                </div>
+                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="username">
+            </div>
+
+             <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-key fa-fw"></i>  password</span>
+                </div>
+                <input type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="password">
+            </div>
+            <button type="submit" class="btn btn-lg  btn-primary">提交</button>  {# 按钮组件 btn-lg是大小 btn-primary是颜色#}
+        </form>
     </div>
-
-     <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">password</span>
-        </div>
-        <input type="password" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="password">
-    </div>
-    <button type="submit" class="btn btn-secondary">提交</button>  {# 按钮组件 #}
-
-
-
-{#    用户登录：<input type="text" name="username" /><br>#}
-{#    密码：<input type="password" name="password" /><br>  {# 用password别人看不见密码 #}
-{#    <input type="submit" />                   {# submit是提交标签 #}
-
-
-</form>
+</div>
 {% end %}
