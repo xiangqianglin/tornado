@@ -1,7 +1,7 @@
 #处理账号相关的模块
 import tornado.web
 from .main import BaseHandler
-from utils.account import auto, register
+from utils.account import auto
 
 
 class RegisterHandler(BaseHandler):   #注册
@@ -13,9 +13,9 @@ class RegisterHandler(BaseHandler):   #注册
         password2 = self.get_argument('password2','')
 
         if username and password1 and (password1 == password2):  #判断username和password不是空的还有1和2相等，就运行注册
-            register(username,password1)
+            self.orm.register(username,password1)
             self.session.set('tudo_user',username)
-            self.write('注册成功')
+            self.redirect('/')                                  #redirect路径跳转到首页
         else:
             self.write('bab username/password')                  #跳转到输出信息
 
