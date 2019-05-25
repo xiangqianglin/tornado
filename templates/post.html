@@ -1,9 +1,15 @@
-{# 图片显示在网页 #}
+{# 数据库图片显示在网页 #}
 {% extends 'base3.html' %}              {# 引入3_html。html文件 #}
 
 {% block title %}post page{% end %}    {# 继承模板 #}
 
 {% block body %}                         {# 覆盖title #}
-post id {{ post.id }} upload by {{ user.username }}<br>
+post id {{ post.id }} upload by <a href="{{ '/profile?name={}'.format(post.user.username) }}">{{ user.username }}</a>  <i class="fa fa-heart text-danger"></i>{{ count }}<br>    {# <i class="fa fa-heart"></i>{{ count }}是插入这个操作  text-danger是红色  第十三章 #}
 <img src="{{ static_url(post.image_url) }}" /><br>
+
+<script type="application/javascript">    {# 点击红心收藏的js #}
+    function  faia() {
+        $.post('/like',{post_id:{{post.id}})
+    }
+</script>
 {% end %}

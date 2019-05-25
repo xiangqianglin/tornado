@@ -35,13 +35,25 @@ class PostHandler(BaseHandler): #单个图片详情页面
         if not post:
             self.write('wrong id {}'.format(post_id))
         else:
-            self.render('post.html',post=post,user=user)     #在网页展示
+            count = self.orm.count_like_for(post_id)
+            self.render('post.html',post=post,user=user,count=count)     #在网页展示
 
 class ProfileHandler(BaseHandler):                          #用户档案页面 第十三章  添加喜欢的图片
-    @tornado.web.authenticated
+    @tornado.web.authenticated                              #不登录就看不见要么的装饰器
     def get(self):
-        user = self.orm.get_user(self.current_user)          #拿到用户的
-        self.render('profile.html',user=user,like_posts=[])
+        # name = self.get_argument('name',None)               #这个是点击别人收藏的名字去看别人的信息
+        # if not name:
+        #     name = self.current_user
+        # user = self.orm.get_user(name)          #拿到用户信息
+        # if user:
+        #     likeg_post = self.orm.likeg_posts_for(name)   #拿到喜欢的图片
+        #     self.render('profile.html',user=user,likeg_post=likeg_post)
+        # else:
+        #     self.write('user 错误')
+
+        user = self.orm.get_user(self.current_user)   #拿到喜欢的图片
+        likeg_post = self.orm.likeg_posts_for(self.current_user)   #拿到喜欢的图片
+        self.render('profile.html',user=user,likeg_post=likeg_post)
 
 class UploadHandler(BaseHandler):                                #上传图片  保存             7
     @tornado.web.authenticated                                 #用户认证过的才能访问
@@ -63,6 +75,9 @@ class UploadHandler(BaseHandler):                                #上传图片  
         # self.write('提交成功')                                   #返回到网页的内容
         self.redirect('/post/{}'.format(post_id))                    #跳转到post.html
 
-
+class LikeHandler(BaseHandler):                                    #喜欢的收藏可以点击
+    def post(self):
+        post_id = self.get_argument('post_id','')
+        print(post_id)
 
 

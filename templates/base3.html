@@ -53,12 +53,7 @@
   </div>
 </nav>
 
-
-
-
-{% block body %}
-    this is tornado
-{% end %}  {# 输出里面的字母 #}
+{% block body %}this is tornado{% end %}  {# 输出里面的字母 #}
 
 <script src="{{ static_url('js/jquery-3.3.1.slim.min.js') }}"></script>    {# ******用静态路径的方式添加*****添加第三个******** #}
 <script src="{{ static_url('js/popper.min.js') }}"></script>
@@ -66,8 +61,3 @@
 
 </body>
 </html>
-
-
-
-
-

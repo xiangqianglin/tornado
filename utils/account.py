@@ -1,6 +1,6 @@
 #db查询的模块的辅助函数
 import hashlib     #用做  md5  密码加密
-from models.auth import User,Post
+from models.auth import User,Post,Likeg
 from models.db import Session
 
 def hasheb(text):                                     #接收的是文本,这里可以加盐
@@ -10,11 +10,6 @@ def auto(username,password):
     # session = Session()
     # user = session.query(User).filter_by(name=username).first()    #查询用户的密码在数据库里有匹配的记录，query查询User，filter_by不用等等于符号，是用传参形式查询，first是取第一个元素
     return User.get_password(username) == hasheb(password)             #调用get_password函数的username是否等于password
-
-
-def get_post(self,post_id):                                           #返回特定id的post实例
-    post = self.db.query(Post).filter_by(id=post_id).first()
-    return post
 
 class HandlerORM:                                                    #辅助操作数据库的工具类，结合RequestHabdler使用
     def __init__(self,db_session):                                   #由handler 进行实例化和close
@@ -50,8 +45,37 @@ class HandlerORM:                                                    #辅助操�
         posts = self.db.query(Post).filter_by(user=user).all()
         return posts
 
-    def get_post(self,post_id):                                             #拿单个post图片的信息
-        post = self.db.query(Post).filter_by(id=post_id).first()
+
+
+
+    def likeg_posts_for(self,username):                                    #查询用户喜欢的posts图片 第十三章
+        user = self.get_user(username)
+        post = self.db.query(Post).filter(Post.id == Likeg.post_id,        #查询多个
+                                          Likeg.post_id == user.id,
+                                          Post.user_id != user.id)         #自己上传的要是喜欢的就不要显示
         return post
+
+    def count_like_for(self,post_id):                                     #查询有哪些用户喜欢这个图片
+        count = self.db.query(Likeg).filter_by(post_id=post_id).count()
+        return count
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
