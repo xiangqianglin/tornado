@@ -37,6 +37,11 @@ class PostHandler(BaseHandler): #单个图片详情页面
         else:
             self.render('post.html',post=post,user=user)     #在网页展示
 
+class ProfileHandler(BaseHandler):                          #用户档案页面 第十三章  添加喜欢的图片
+    @tornado.web.authenticated
+    def get(self):
+        user = self.orm.get_user(self.current_user)          #拿到用户的
+        self.render('profile.html',user=user,like_posts=[])
 
 class UploadHandler(BaseHandler):                                #上传图片  保存             7
     @tornado.web.authenticated                                 #用户认证过的才能访问

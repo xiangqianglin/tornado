@@ -1,0 +1,39 @@
+{#第十三章  添加喜欢的图片#}
+
+{% extends 'base3.html' %}              {# 引入3_html。html文件 #}
+
+{% block title %}profile page{% end %}    {# 继承模板 #}
+
+{% block body %}                         {# 覆盖title #}
+
+<div class="card">
+    <div class="card-header">
+        <h3>{{ user.name }} 喜欢的图片</h3>
+    </div>
+    <div class="row">
+        {% for p in like_post %}
+        <div class="col-3 col-sm-3">
+            <a href="/post/{{ p.id }}">
+                <img src="{{ static_url(p.image_url) }}" class="img-fluid"/>
+            </a>
+        </div>
+        {% end %}
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h3>{{ user.name }} 上传的图片</h3>
+    </div>
+    <div class="row">
+        {% for p in user.posts %}
+        <div class="col-3 col-sm-3">
+            <a href="/post/{{ p.id }}">
+                <img src="{{ static_url(p.image_url) }}" class="img-fluid"/>
+            </a>
+        </div>
+        {% end %}
+    </div>
+</div>
+
+{% end %}

@@ -42,6 +42,10 @@ class Post(Base):                                                            #�
     def __repr__(self):
         return "<post:#{}-{}>".format(self.id)                    #字符串显示的格式
 
+class Likeg(Base):                                                 #记录用户标记喜欢的图片,相当于user和post的中间
+    __tablename__ = 'likes'
+    user_id = Column(Integer,ForeignKey('users.id'),nullable=False,primary_key=True)
+    post_id = Column(Integer,ForeignKey('posts.id'),nullable=False,primary_key=True)
 
 if __name__ == '__main__':
     Base.metadata.create_all()                                               #执行create_all方法就会去找对应的类在去创建表
