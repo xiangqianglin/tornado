@@ -59,5 +59,8 @@
 <script src="{{ static_url('js/popper.min.js') }}"></script>
 <script src="{{ static_url('js/bootstrap.min.js') }}"></script>
 
+{% block extra_scripts %}{% end %}                {# 添加这个可以让room。html的js不足所有页面展示，是在最后加载 #}
+
+
 </body>
 </html>

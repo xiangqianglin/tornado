@@ -1,0 +1,31 @@
+{##websocket双向通信  发送页面#}
+{% extends 'base3.html' %}
+{% block title %}room page {% end %}
+{% block body %}
+
+
+<div id="inbox">                                 {# 聊天室的输入框 #}
+    {% for message in messages %}
+    {% raw message['html'] %}
+    {% end %}
+</div>
+
+<div id="input">
+    <form action="#" method="post" id="messageform">
+        <table>
+            <tr>
+                <td>
+                    <input name="body" id="message" style="width: 500px">
+                </td>
+                <td style="padding-left: 5px">
+                    <input type="submit" value="发送">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% end %}
+
+{% block extra_scripts %}
+<script type="application/javascript" src="{{ static_url('js/chat.js') }}"></script>  {# js事件在action提交就不会跳转#}
+{% end %}

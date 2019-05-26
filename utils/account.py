@@ -51,7 +51,7 @@ class HandlerORM:                                                    #辅助操�
     def likeg_posts_for(self,username):                                    #查询用户喜欢的posts图片 第十三章
         user = self.get_user(username)
         post = self.db.query(Post).filter(Post.id == Likeg.post_id,        #查询多个
-                                          Likeg.post_id == user.id,
+                                          Likeg.user_id == User.id,
                                           Post.user_id != user.id)         #自己上传的要是喜欢的就不要显示
         return post
 

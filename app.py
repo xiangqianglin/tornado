@@ -20,9 +20,11 @@ class Application(tornado.web.Application):
             (r'/login', account.LoginHanlder),                            #数据库-用户登录页面的认证2
             (r'/upload', main.UploadHandler),                             #添加图片保存到数据库3
             (r'/logan', account.LogouHander),                             #退出登陆页面     第十二章
-            (r'/profile', main.ProfileHandler),                              # 喜欢和收藏页面  第十三章
+            (r'/profile', main.ProfileHandler),                           # 喜欢和收藏页面  第十三章
             (r'/like', main.LikeHandler),                                 # 喜欢和收藏页面点击  第十三章
-            (r'/room', chat.RoomHandler),                                 #websocket双向通信    第十四章
+            (r'/room', chat.RoomHandler),                                 #websocket双向通信    第十四章1
+            (r'/ws/echo', chat.EchoWebSocket),                            #websocket双向通信 客服端    第十四章1
+            (r'/ws', chat.ChatWSHandler),                                 #websocket双向通信 服务端   第十四章1
         ]
         settings = dict(
             debug=True,                        # 访问不存在的会报错1
