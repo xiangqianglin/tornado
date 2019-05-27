@@ -46,3 +46,8 @@ class LogouHander(BaseHandler):
     def get(self):
         self.session.delete("tudo_user")   #退出登陆用的删除会话信息
         self.render('logan.html')
+
+class ExtendsHandler(BaseHandler):   #模板继承 4_html  3       《弹窗广告》
+    @tornado.web.authenticated  #装饰要保护的内容
+    def get(self):
+        self.render('guanggao.html',username=self.current_user)

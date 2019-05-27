@@ -4,6 +4,7 @@ import tornado.web
 
 from hander1.main import IndexHandler,ExploreHandler,PostHandler#选中要放外部的类按f6，在里面选，引入外部的main文件
 from hander1 import main,account,chat          #用户注册用的
+from utils import uimethods,uimodules #导入外部包
 
 import tornado.options                      #显示额外的信息1
 from tornado.options import define,options  #调式模式 可以改变端口1
@@ -25,6 +26,7 @@ class Application(tornado.web.Application):
             (r'/room', chat.RoomHandler),                                 #websocket双向通信    第十四章1
             (r'/ws/echo', chat.EchoWebSocket),                            #websocket双向通信 客服端    第十四章1
             (r'/ws', chat.ChatWSHandler),                                 #websocket双向通信 服务端   第十四章1
+            (r'/guang', account.ExtendsHandler),                          #w弹窗广告   第十四章1
         ]
         settings = dict(
             debug=True,                        # 访问不存在的会报错1
@@ -32,7 +34,8 @@ class Application(tornado.web.Application):
             static_path='static',              # 静态文件配置 自动去查找那个文件
         cookie_secret="wsegehdsg" ,            #随便输入字符串，好让别人看不见，预防用户伪造cookie
         login_url='/login',                    #用cxtends访问页面,重定向跳转 到login登录页面
-        # xsrf_cookies=True,                   #跨站请求防御***
+        ui_methods=uimethods,         #一个函数或类需要在很多模板中被导入
+        ui_modules=uimodules,         #一个函数或类需要在很多模板中被导入
         pycket = {                             #这个是用session登陆用的
             'engine': 'redis',                 #使用redis这个引擎，存储session数据
             'storage': {
