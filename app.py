@@ -3,7 +3,7 @@ import tornado.ioloop
 import tornado.web
 
 from hander1.main import IndexHandler,ExploreHandler,PostHandler#选中要放外部的类按f6，在里面选，引入外部的main文件
-from hander1 import main,account,chat          #用户注册用的
+from hander1 import main,account,chat,yibu          #用户注册用的
 from utils import uimethods,uimodules #导入外部包
 
 import tornado.options                      #显示额外的信息1
@@ -27,6 +27,8 @@ class Application(tornado.web.Application):
             (r'/ws/echo', chat.EchoWebSocket),                            #websocket双向通信 客服端    第十四章1
             (r'/ws', chat.ChatWSHandler),                                 #websocket双向通信 服务端   第十四章1
             (r'/guang', account.ExtendsHandler),                          #w弹窗广告   第十四章1
+            (r'/syn', yibu.SyncSaveHandler),                          #w 第十五章  同步
+            (r'/save', yibu.AsyncSaveHandler),                          #w 第十五章  异步
         ]
         settings = dict(
             debug=True,                        # 访问不存在的会报错1

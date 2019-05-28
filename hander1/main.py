@@ -1,9 +1,13 @@
 import tornado.web
+import logging
 from pycket.session import SessionMixin  #添加session的一些功能的类
 from utils.photo import UploadImage
 from PIL import Image  #图片处理
 from utils.account import HandlerORM  #数据库的图片调用
 from models.db import Session
+
+
+logger = logging.getLogger('tudo.log')
 
 class BaseHandler(tornado.web.RequestHandler,SessionMixin):  #所有需要跳转回访问页面的类都可以继承这个
     def get_current_user(self):   #复写current_user方法来 用户认证
@@ -12,10 +16,14 @@ class BaseHandler(tornado.web.RequestHandler,SessionMixin):  #所有需要跳转
 
     def prepare(self):                             #准备操作生命周期
         self.db_session = Session()
+        print('db session instance')
+        logger.info('db session instance %s' % self)
         self.orm = HandlerORM(self.db_session)
 
     def on_finish(self):
         self.db_session.close()                    #结束操作生命周期
+        print('db session close')
+        logger.info('db session close')
 
 class IndexHandler(BaseHandler):  #首页 用户上传图片的展示
     @tornado.web.authenticated
