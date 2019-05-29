@@ -11,7 +11,7 @@ from .main import BaseHandler
 from utils.photo import UploadImage
 
 
-logger = logging.getLogger('tudo.log')
+logger = logging.getLogger('tudo.log')                                      #打印操作顺序的日志和时间戳
 
 class SyncSaveHandler(BaseHandler):                                         #同步
 
@@ -44,7 +44,7 @@ class AsyncSaveHandler(BaseHandler):                                       #异�
         client = AsyncHTTPClient()                                     #同步用requests，异步用AsyncHTTPClient去下载图片
         resp = yield client.fetch(save_url)                            #用client装饰器标记这个函数，在用yield把这个结果抛出来，执行到这里会暂停   《****重要****》
         logger.info(resp.code)
-        yield sleep(20)
+        yield sleep(20)                                               #时间延迟
         logger.info('sleep end')
 
         up_img = UploadImage('x.jpg', self.settings['static_path'])
