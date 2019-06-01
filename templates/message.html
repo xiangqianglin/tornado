@@ -1,7 +1,11 @@
 {##websocket双向通信  渲染我们的消息#}
 <div class="message" id="m{{ chat['id'] }}">
-{#    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="10">#}
-{#        <span class="badge badge-primary">{{ chat['username'] }}</span>:{% module linkify(chat['body']) %}#}
-{#    </svg>#}
     <span class="badge badge-primary">{{ chat['username'] }}@{{ chat['created'] }}</span>:{% module linkify(chat['body']) %}                      {# created是添加时间戳 #}
+    {% if chat['img_url'] %}                                    {# 判断有没有这个img_url,有才显示 #}
+    <div>
+        <a href="/post/{{ chat["post_id" ] }}">
+          <img src="{{ static_url(chat['img_url']) }}" />        {# 把用户发送的url连接访问的图片显示到聊天室 #}
+        </a>
+    </div>
+    {% end %}
 </div>

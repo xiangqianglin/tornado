@@ -9,7 +9,7 @@ from tornado.gen import coroutine, sleep                          #coroutine装�
 
 from .main import BaseHandler
 from utils.photo import UploadImage
-
+from .chat import ChatWSHandler,make_da
 
 logger = logging.getLogger('tudo.log')                                      #打印操作顺序的日志和时间戳
 
@@ -39,28 +39,38 @@ class AsyncSaveHandler(BaseHandler):                                       #异�
     @coroutine                                                             #Python内置的异步装饰器是async    await相当于yield
     def get(self):
         save_url = self.get_argument('save_url', '')
+        username = self.get_argument('name', '')
         logger.info(save_url)
 
         client = AsyncHTTPClient()                                     #同步用requests，异步用AsyncHTTPClient去下载图片
         resp = yield client.fetch(save_url)                            #用client装饰器标记这个函数，在用yield把这个结果抛出来，执行到这里会暂停   《****重要****》
         logger.info(resp.code)
-        yield sleep(20)                                               #时间延迟
-        logger.info('sleep end')
 
-        up_img = UploadImage('x.jpg', self.settings['static_path'])
+        # yield sleep(20)                                               #时间延迟
+        # logger.info('sleep end')
+
+        up_img = UploadImage('x.jpg', self.settings['static_path'])   #保存图片到数据库
         up_img.save_upload(resp.body)
         up_img.make_thumb()
 
         post_id = self.orm.add_post(up_img.image_url,
                                     up_img.thumb_url,
-                                    self.current_user)
+                                    username)
 
-        self.redirect('/post/{}'.format(post_id))
+        # self.redirect('/post/{}'.format(post_id))
+        msg = "user {} post:http://192.168.80.130:8000/post/{}".format(username,post_id)   #系统提示出来结果了
+        chat = make_da(self,msg,img_url=up_img.thumb_url,post_id=post_id)          #把url生成的缩略图传入
+        ChatWSHandler.updata(chat)
+        ChatWSHandler.send_upda(chat)                              #给用户发送消息和发送图片连接返回图片
+
+
+
 
 #http://pic1.win4000.com/wallpaper/2018-05-08/5af150aea45bd.jpg
 #http://192.168.80.130:8000/syn?save_url=http://pic1.win4000.com/wallpaper/2018-05-08/5af150aea45bd.jpg     是在网页刷新
 #http://192.168.80.130:8000/syn?save_url=http://source.unsplash.com/random  是用同步生成随机图片
 #http://192.168.80.130:8000/save?save_url=http://source.unsplash.com/random  这个是用异步生成随机图片
 
-
+#http://pic1.win4000.com/wallpaper/2018-05-08/5af150aea45bd.jpg
+#http://source.unsplash.com/random
 
