@@ -1,4 +1,6 @@
 #项目
+import logging  #日志模块
+
 import tornado.ioloop
 import tornado.web
 
@@ -8,6 +10,9 @@ from utils import uimethods,uimodules #导入外部包
 
 import tornado.options                      #显示额外的信息1
 from tornado.options import define,options  #调式模式 可以改变端口1
+
+logging.basicConfig(level=logging.DEBUG,format='%(levelname)s -- %(funcName)s -- %(lineno)d -- %(filename)s: %(message)s')   #第一个是打印日志级别数值 第二个是当前函数   第三个是输出消息
+
 define('port',default='8000',help='listening port',type=int)
 define('debuh',default='True',help='Debug mode',type=bool)
 

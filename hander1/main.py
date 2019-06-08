@@ -16,14 +16,12 @@ class BaseHandler(tornado.web.RequestHandler,SessionMixin):  #所有需要跳转
 
     def prepare(self):                             #准备操作生命周期
         self.db_session = Session()
-        print('db session instance')
         logger.info('db session instance %s' % self)
         self.orm = HandlerORM(self.db_session)
 
     def on_finish(self):
         self.db_session.close()                    #结束操作生命周期
-        print('db session close')
-        logger.info('db session close')
+        logger.warning('db session close')         #日志等级用warning警告的
 
 class IndexHandler(BaseHandler):  #首页 用户上传图片的展示
     @tornado.web.authenticated
@@ -89,3 +87,4 @@ class LikeHandler(BaseHandler):                                    #喜欢的收
         print(post_id)
 
 
+#  调整日志等级，可以在app（1）的下拉框选Edit里面的parameters里面写  -logging=warning
